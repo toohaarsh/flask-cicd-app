@@ -20,7 +20,8 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 script {
-                    bat "${DOCKER_PATH} build -t ${IMAGE_NAME} ."
+                    bat "\"${DOCKER_PATH}\" build -t ${IMAGE_NAME} ."
+
                 }
             }
         }
