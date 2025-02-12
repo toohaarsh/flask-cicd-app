@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "flask-webapp"
+        IMAGE_NAME = "flask-webapp:latest"
         CONTAINER_NAME = "flask-webapp-container"
+        DOCKER_PATH = 'C:\\Program Files\\Docker\\Docker\\Resources\\bin\\docker.exe'
         DOCKER_HUB_REPO = "harrsh24/flask-webapp"
     }
 
@@ -19,7 +20,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 script {
-                    bat 'docker build -t $IMAGE_NAME .'
+                    bat "${DOCKER_PATH} build -t ${IMAGE_NAME} ."
                 }
             }
         }
