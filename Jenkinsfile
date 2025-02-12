@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 script {
-                    sh 'docker build -t $IMAGE_NAME .'
+                    bat 'docker build -t $IMAGE_NAME .'
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Running Docker container...'
                 script {
-                    sh 'docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME'
+                    bat 'docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Cleaning up old containers...'
                 script {
-                    sh '''
+                    bat '''
                         docker stop $CONTAINER_NAME || true
                         docker rm $CONTAINER_NAME || true
                         docker rmi $IMAGE_NAME || true
