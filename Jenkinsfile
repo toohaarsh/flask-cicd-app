@@ -11,7 +11,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
-                git 'https://github.com/toohaarsh/flask-cicd-app'
+                git branch: 'main', url: 'https://github.com/toohaarsh/flask-cicd-app'
+
             }
         }
 
