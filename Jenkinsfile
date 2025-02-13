@@ -12,7 +12,6 @@ pipeline {
             steps {
                 echo 'Checking out code...'
                 git branch: 'main', url: 'https://github.com/toohaarsh/flask-cicd-app'
-
             }
         }
 
@@ -29,6 +28,11 @@ pipeline {
             steps {
                 echo 'Running Docker container...'
                 script {
+                    // Stop and remove the existing container if it exists
+                    bat "\"${DOCKER_PATH}\" stop ${CONTAINER_NAME} || exit 0"
+                    bat "\"${DOCKER_PATH}\" rm ${CONTAINER_NAME} || exit 0"
+                    
+                    // Run the new container
                     bat "\"${DOCKER_PATH}\" run -d -p 5000:5000 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                 }
             }
